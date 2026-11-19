@@ -1,0 +1,363 @@
+{
+  "atAGlance": [
+    "12+ years building enterprise .NET back ends",
+    "Fintech back offices: credit eligibility, brokerage billing, OTC equities",
+    "Bulk, idempotent data pipelines and a SQL outbox relay publishing to RabbitMQ",
+    "Multi-tenant ASP.NET Core APIs, SignalR and RabbitMQ workers",
+    "Mentored four senior engineers; Top Rated on Upwork (39 contracts, 100% Job Success)",
+    "Earlier: enterprise ERP work at Epyllion, including a metadata-driven framework for setup screens",
+    "Currently working remotely with a US product team"
+  ],
+  "expertise": [
+    {
+      "icon": "Server",
+      "title": "Backend Architecture & .NET",
+      "skills": [
+        "C#, .NET Framework 4.7, .NET 5/6/8",
+        "ASP.NET Core, MVC and Web API design",
+        "Layered and Clean Architecture, SOLID",
+        "Repository, specification and unit-of-work patterns",
+        "JWT authentication, multi-tenant authorization",
+        "Legacy-to-modern system migrations"
+      ]
+    },
+    {
+      "icon": "Database",
+      "title": "Data Systems",
+      "skills": [
+        "SQL Server schema design and query tuning",
+        "Dapper and Entity Framework (EF6 / EF Core)",
+        "SqlBulkCopy and MERGE-based upserts",
+        "Idempotent loads and explicit transactions",
+        "Versioned migrations with DbUp",
+        "Reporting queries and dynamic CTE pagination"
+      ]
+    },
+    {
+      "icon": "Settings",
+      "title": "Messaging & Background Work",
+      "skills": [
+        "RabbitMQ consumers with EasyNetQ",
+        "SQL-backed outbox relay with row claiming",
+        "SignalR real-time status updates",
+        "Windows-service background workers",
+        "Retry and backoff with Polly",
+        "Hangfire job scheduling"
+      ]
+    },
+    {
+      "icon": "Layers",
+      "title": "Documents & Integrations",
+      "skills": [
+        "PDF extraction (Adobe PDF Services)",
+        "PDF and report generation (Telerik, RDLC)",
+        "SFTP, REST and gRPC integrations",
+        "Excel, CSV and accounting-export ingestion",
+        "Email delivery pipelines",
+        "Azure Blob Storage"
+      ]
+    },
+    {
+      "icon": "Cloud",
+      "title": "Quality & Delivery",
+      "skills": [
+        "Azure DevOps pipelines and boards",
+        "Build and publish pipelines for APIs, workers and migrations",
+        "xUnit, MSTest, Moq, NSubstitute",
+        "Architecture tests with NetArchTest",
+        "Serilog and NLog structured logging",
+        "Code reviews and technical documentation"
+      ]
+    },
+    {
+      "icon": "Layout",
+      "title": "Frontend (Supporting)",
+      "skills": [
+        "Blazor Server",
+        "Razor with Kendo UI and jQuery",
+        "React and Next.js (working level)",
+        "UI integration with server-side paging"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "slug": "credit-eligibility-platform",
+      "icon": "Layers",
+      "title": "Credit-Eligibility Platform",
+      "summary": "Ingests financial statements from PDF, spreadsheets, bank files and accounting exports, then scores companies for short-term credit eligibility.",
+      "description": "The Intelligent Financial Assistant, a .NET 8 finance platform for short-term credit eligibility. Client companies are onboarded and approved by an admin team after review, then submit about three years of historical statements plus ongoing annual, monthly and bank statements (PDF, CSV, XLSX). ETL pipelines normalise balance sheets and income statements and compute metrics such as liquidity and debt-to-equity, while RabbitMQ workers run the processing with real-time status over SignalR. Blazor portals give admins and clients grid, pivot and chart reporting. I designed and built it end to end over more than three years: architecture, database, APIs, Blazor front ends and workers. It is in production and still evolving.",
+      "technologies": [
+        "C#",
+        ".NET 8",
+        "Blazor Server",
+        "Syncfusion Blazor",
+        "SQL Server",
+        "Dapper",
+        "RabbitMQ",
+        "SignalR",
+        "Adobe PDF Services"
+      ],
+      "challenges": [
+        "Turning fragmented PDF table output into balance sheets and income statements, including multi-page statements",
+        "Normalising many input shapes (PDF, templated spreadsheets, bank CSVs, accounting exports) into one model",
+        "Making reloads safe when files are re-uploaded or jobs are retried",
+        "Giving users live progress for long-running processing"
+      ],
+      "outcomes": [
+        "Heuristic PDF pipeline: weighted keyword scoring, note-page rejection and a page-stitching state machine",
+        "Common extract/transform/load contract across six ingestion paths, with raw-to-validated staging tables",
+        "Transactional bulk loading with SqlBulkCopy and temp-table MERGE upserts",
+        "Accounting-ratio engine (liquidity, solvency, coverage, turnover) on decimal arithmetic",
+        "RabbitMQ-driven workers with real-time status to the browser over SignalR",
+        "Blazor admin and client portals with Syncfusion grids, pivot tables and charts, Excel export and a step-by-step monthly upload wizard",
+        "APIs for client onboarding, admin approval and statement uploads, including re-upload of an already processed month",
+        "187 versioned database migrations managed with DbUp"
+      ],
+      "role": "Full-stack engineer and principal engineer on the platform: architecture, database design, APIs, ETL and workers, and the Blazor front ends."
+    },
+    {
+      "slug": "brokerage-billing-platform",
+      "icon": "Zap",
+      "title": "Brokerage Back-Office & Billing",
+      "summary": "Automates trade ingestion, position roll-up, brokerage calculation and monthly invoicing for a futures and options introducing broker.",
+      "description": "A back-office system that loads trade files and clearer data, rolls trades into positions, calculates per-lot brokerage and generates monthly invoices as PDF and CSV for email delivery. I led the port of a legacy .NET Framework billing system to a layered .NET 5/6 application, and later built a sister product for OTC equity order and fill capture.",
+      "technologies": [
+        "C#",
+        ".NET 6",
+        "ASP.NET Core",
+        "SQL Server",
+        "Dapper",
+        "Kendo UI",
+        "SFTP",
+        "Telerik PDF"
+      ],
+      "challenges": [
+        "De-duplicating trades across files that identify the same trade differently",
+        "Resolving a broker code from any of several alias columns",
+        "Keeping web requests fast while long jobs (file load, invoicing, sending) run elsewhere",
+        "Isolating data between broker legal entities"
+      ],
+      "outcomes": [
+        "Worker pipeline: file load, roll-up, brokerage, validation, invoicing and sending, driven by job rows",
+        "Brokerage rules covering per-lot, per-trade, percentage and split-party rates, plus OTC trades",
+        "Invoice generation per client and currency with PDF and CSV output",
+        "Idempotent clearer-file ingestion over SFTP",
+        "Broker-entity multi-tenancy through JWT claims",
+        "OTC equity module with an 8-step deposit-form wizard that generates compliance PDFs"
+      ],
+      "role": "Designed the pipeline and led the legacy port, working with a small team under a product owner."
+    },
+    {
+      "slug": "sports-data-etl-services",
+      "icon": "Database",
+      "title": "Multi-Sport Data ETL Services",
+      "summary": "Per-sport .NET 8 ETL services that load provider feeds into SQL Server in bulk; the American football service adds a SQL outbox relay publishing events to RabbitMQ.",
+      "description": "A family of ETL services, one per sport, that pull schedules, box scores, projections and reference data from external providers (SportsDataIO for American football and basketball, Roanuz for football and cricket) and load them into per-sport SQL Server databases. The American football solution is the most complete: a clean-architecture layout (domain, application use cases, data access, hosted workers), raw provider payloads kept in MongoDB, and an outbox relay that publishes calculation events to the multi-tenant fantasy platform.",
+      "technologies": [
+        "C#",
+        ".NET 8",
+        "SQL Server",
+        "Dapper",
+        "SqlBulkCopy",
+        "MongoDB",
+        "RabbitMQ",
+        "EasyNetQ",
+        "DbUp",
+        "Serilog",
+        "Azure Pipelines"
+      ],
+      "challenges": [
+        "Loading large weekly datasets repeatedly without duplicates or partial failures",
+        "Surviving unauthorized and transient provider API failures without losing a whole run",
+        "Publishing events exactly once from several instances without distributed transactions",
+        "Reusing one pattern across four sports and two providers"
+      ],
+      "outcomes": [
+        "Hosted worker services calling single-purpose use cases (reference-data sync, box scores by week, player projections by week, headshot sync) on a schedule",
+        "Bulk upserts through staging tables and MERGE, with a lookback window for incremental sync and per-match transaction boundaries",
+        "Item-level fault tolerance: a failing match or call is logged and skipped while the rest of the run continues",
+        "Outbox written in the same transaction as the game data; a hosted publisher claims batches with READPAST/UPDLOCK, retries with exponential backoff and jitter, and resets stuck locks",
+        "Typed shared event contracts consumed through EasyNetQ AutoSubscriber by the fantasy platform",
+        "Relational schema for competitions, tournaments, timeframes, teams, players, schedules, scores, quarters and scoring plays, with versioned migrations",
+        "Unit and integration-style data-access and API-client tests, and pipelines publishing the worker deployables",
+        "Player image pipeline that validates, resizes and publishes photos to blob storage"
+      ],
+      "role": "Lead backend engineer and solution architect on the American football platform (schema, clean-architecture refactor, use cases, outbox, testing, CI/CD); built the football, cricket and basketball ETL services on the same patterns."
+    },
+    {
+      "slug": "fantasy-sports-platform",
+      "icon": "Shield",
+      "title": "Fantasy Sports Platform (in progress)",
+      "summary": "Multi-tenant fantasy sports back end: daily contest creation, and leaderboard workers that consume match events idempotently. American football is implemented; the platform did not reach full release.",
+      "description": "A white-label fantasy sports platform on .NET 8 and SQL Server. A contest-creation worker creates American football tournaments daily. A leaderboard worker consumes match events from the sports data services over RabbitMQ, applies them with a per-match checkpoint, updates points in one transaction, and polls for matches whose events were missed. Each white-label operator has its own database, resolved per request. The leaderboard side was only partly finished: American football is implemented end to end, other sports are stubbed, and prize calculation is a placeholder.",
+      "technologies": [
+        "C#",
+        ".NET 8",
+        "SQL Server",
+        "Dapper",
+        "RabbitMQ",
+        "EasyNetQ",
+        "Azure Blob Storage"
+      ],
+      "challenges": [
+        "Keeping leaderboards correct when events arrive twice, late or not at all",
+        "Isolating each white-label operator's data while sharing one API",
+        "Structuring the contest and leaderboard logic so more sports can be added"
+      ],
+      "outcomes": [
+        "Daily scheduled worker that creates American football tournaments, with run-now override and retry policy",
+        "Event consumer plus checkpoint on the source-updated timestamp, so duplicate or older events are skipped",
+        "Polling hosted service that finds matches with pending updates and reprocesses them when events were missed",
+        "One database transaction per match: player points, team totals and tournament-match final state are updated together",
+        "Database-per-operator tenancy resolved per request from the broker context and bound to the caller through a JWT claim",
+        "Per-sport processing entry points in place (football, cricket, basketball, baseball, hockey) pending implementation",
+        "Unit and integration-style data-access tests for contest, team and settings commands and queries"
+      ],
+      "role": "Lead backend architect and principal .NET engineer: designed the tenancy model and event-driven leaderboard flow, built the APIs, workers and data-access layer."
+    },
+    {
+      "slug": "clean-architecture-reference",
+      "icon": "Brain",
+      "title": "Clean Architecture Reference Platform",
+      "summary": "A .NET 8 reference implementation with compiler-enforced layer boundaries, proposed to engineering leadership for a multi-tenant SaaS product.",
+      "description": "While maintaining APIs for an EHS SaaS platform, I designed a working reference architecture to show how a legacy monolith could move to a modular one. It covers authentication, per-request tenant resolution, a reusable list-view query pipeline and architecture tests that fail the build on layer violations, and I presented it with an executive brief and developer guide.",
+      "technologies": [
+        "C#",
+        ".NET 8",
+        "EF Core 8",
+        "Dapper",
+        "SQL Server",
+        "NetArchTest",
+        "MSTest"
+      ],
+      "challenges": [
+        "Proving a strict architecture is practical inside an existing legacy codebase",
+        "Keeping legacy password and token formats working with new endpoints",
+        "Building one safe, reusable pipeline for filtered, sorted, paged lists",
+        "Resolving each request's tenant database without leaking credentials"
+      ],
+      "outcomes": [
+        "Eight architecture tests enforcing layer dependencies in CI",
+        "List-view pipeline with 16 filter operators, global and per-field search and row-level authorization",
+        "Per-request tenant connection resolution with encrypted credentials",
+        "Six sign-in paths: password, one-time code, session token, impersonation and reset",
+        "Hybrid data access: EF Core for writes with audit snapshots, Dapper for reads"
+      ],
+      "role": "Designed and built the reference platform and wrote the executive brief and developer guide."
+    },
+    {
+      "slug": "textile-erp",
+      "icon": "Database",
+      "title": "Textile ERP (Inventory & Setup Framework)",
+      "summary": "An internal ERP for a textile unit (2018 to 2021): I worked on the Inventory module and other modules, wrote a metadata-driven setup framework, and sped up a daily management report. Not all modules were completed.",
+      "description": "An ASP.NET MVC and Web API system for a textile unit within a group of several garments units, replacing paper and spreadsheet tracking. The codebase has 548 entities and 159 controllers across yarn procurement, inventory, knitting, R&D and lab testing, costing and booking analysis. Not every module was completed during my time. I worked on the Inventory module (yarn receive, QC, issue, return, transfer and requisition) and several other modules, wrote the Common Interface framework for setup pages, optimised a daily management report, and gathered requirements directly from factory teams.",
+      "technologies": [
+        "C#",
+        ".NET Framework 4.7",
+        "ASP.NET MVC",
+        "Web API",
+        "SQL Server",
+        "EF6",
+        "Dapper",
+        "Autofac"
+      ],
+      "challenges": [
+        "Keeping stock transactions (receive, QC, issue, return, transfer) consistent across a long production chain",
+        "A management report that took about 10 minutes every morning",
+        "Avoiding a new controller, view and script for every setup table"
+      ],
+      "outcomes": [
+        "Inventory module (among other modules): yarn receive, receive QC, issue, issue return, transfer and requisition screens backed by the ERP's repository and specification layers",
+        "Common Interface: a metadata-driven setup-page framework (screen, fields, grids, lookups and SQL stored as configuration rows, served by one generic API and view), so new setup pages need no new code",
+        "Daily management report cut from about 10 minutes to 1 to 2 minutes through SQL rewrites, indexing and an API"
+      ],
+      "role": "Senior engineer: worked on the Inventory module and other modules, wrote Common Interface, and informally mentored and led a small team without a formal title."
+    }
+  ],
+  "experience": [
+    {
+      "title": "Back-End API Developer",
+      "company": "Frontline Data Solutions · Remote (Texas, USA)",
+      "period": "May 2026 – Present",
+      "highlights": [
+        "Build and maintain ASP.NET Core 8 REST APIs for the MOC and ACT modules of a multi-tenant EHS SaaS platform serving web and mobile clients, migrating pages from a stored-procedure monolith to modular services",
+        "Designed an event-driven email notification system using the SQL Server outbox pattern and Hangfire, with duplicate-safe delivery logging, templates in 11 languages and on-demand PDF summaries",
+        "Developed recursive T-SQL to resolve multi-level, division-scoped delegation chains with cycle protection",
+        "Cut large-file upload times from roughly 1 to 3 minutes to 10 to 20 seconds with streaming and pooled HttpClient calls",
+        "Fixed IDOR issues and enforced company, division and account-level data isolation; resolved SonarQube findings",
+        "Designed a Clean Architecture reference platform (10 source and 11 test projects) with 8 NetArchTest rules that enforce layer boundaries in CI, and wrote the executive brief and developer guide",
+        "Built a reusable CTE list-view pipeline (16 filter operators, row-level authorization, single-round-trip paging) and a six-path JWT sign-in system"
+      ]
+    },
+    {
+      "title": "Senior Software Engineer",
+      "company": "Smart Alpha Beta Gamma Ltd · Remote (UK)",
+      "period": "Dec 2021 – Apr 2026",
+      "highlights": [
+        "Credit-eligibility platform (in production, 2023 onward): full-stack and principal engineer for architecture, database, APIs and Blazor front ends. Built a heuristic PDF pipeline on Adobe PDF Services, a multi-source ETL framework with idempotent reloads, transactional SqlBulkCopy/MERGE loading, RabbitMQ workers with SignalR status, an accounting-ratio engine and 187 DbUp migrations",
+        "Brokerage billing: designed a pipeline for trade-file and clearer (SFTP) ingestion, position roll-up, per-lot brokerage and monthly PDF/CSV invoices; led the port of a legacy .NET Framework system to a layered .NET 5/6 application",
+        "OTC equity back office: built an 8-step deposit-form wizard that generates compliance PDFs",
+        "Sports data ETL: lead backend engineer and solution architect for .NET 8 services for American football, football, cricket and basketball, with staging-table MERGE upserts and a SQL outbox relay (READPAST/UPDLOCK claiming, stuck-lock reset, backoff with jitter) publishing typed events to RabbitMQ",
+        "Fantasy sports platform (partly built): multi-tenant contest and leaderboard back end with a checkpoint table, polling fallback and transactional scoring updates; American football implemented",
+        "Support systems: main author of a risk-support API and admin UI (live match monitor over SignalR fed by a RabbitMQ consumer, withdrawal approvals, FXBO integration); contributed to fund-reporting and risk-dashboard products",
+        "Wrote a Dapper wrapper and shared libraries (test utilities, database configuration, event contracts); maintained CI pipelines across more than ten repositories"
+      ]
+    },
+    {
+      "title": "Senior Software Engineer",
+      "company": "Epyllion Group · Dhaka, Bangladesh",
+      "period": "Sep 2018 – Dec 2021",
+      "highlights": [
+        "Senior engineer on a textile ERP built from scratch (ASP.NET MVC 5, Web API 2, SQL Server; 548 entities, 159 controllers); not all modules were completed during my time",
+        "Worked on the Inventory module (yarn receive, QC, issue, return, transfer, requisition) and other modules",
+        "Designed 'Common Interface', a metadata-driven framework for setup pages: screens, fields, grids, lookups and SQL are defined as database rows and rendered by one generic API and view, so a new setup page needs no new back-end or front-end code",
+        "Built, as sole developer, an audit and compliance management system (ASP.NET MVC 5, Web API 2, EF6, Autofac, FluentValidation, RDLC): configurable question templates with sections and weights, audits with scopes, findings and formulas, and certificate tracking with history",
+        "Built a Supplier Portal (ASP.NET MVC, pdfSharp, jQuery, Bootstrap, dhtmlx, SQL Server), live internally since 2019: imports export-garment sales orders from merchants, processes uploaded purchase-requisition PDFs and prepares supplier requirement requisitions for the ERP",
+        "Built an Expense Management System (ASP.NET MVC, pdfSharp, jQuery, Bootstrap, dhtmlx)",
+        "Cut a daily management report from about 10 minutes to 1 to 2 minutes with SQL rewrites, indexing and an API",
+        "Led without a formal title: mentored four senior software engineers, shared knowledge across the team, and ran sprint planning, task assignment and code review"
+      ]
+    },
+    {
+      "title": "Freelance Software Engineer",
+      "company": "Upwork",
+      "period": "Jun 2016 – Aug 2018",
+      "highlights": [
+        "Eatsy Technologies (2017), a Singapore mobile order-ahead and payment app startup: designed the API architecture for the mobile and web apps and led the back end with two other developers; left before the project was completed",
+        "LeadScripts, an AI marketing-copy SaaS product: built the internal admin application and worked on the early OpenAI integration",
+        "Delivered client work in C# and .NET, including ASP.NET Core APIs, clean-architecture web app updates and long-running maintenance contracts",
+        "Top Rated freelancer: 39 contracts, 1,764 hours and a 100% Job Success Score; several clients left 5.0 reviews and endorsements"
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "ShasthoNet · Dhaka, Bangladesh",
+      "period": "Jan 2016 – Jun 2016",
+      "highlights": [
+        "Full-stack developer at a startup building a SaaS healthcare suite for doctors, patients, diagnostics centres and hospitals",
+        "Built the Patient and Doctor modules: doctor appointments, storage of patient medical records, and search over historical data",
+        "Delivered both modules ahead of the deadline",
+        "Stack: ASP.NET MVC, SQL Server, RDLC reports, jQuery and Bootstrap"
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Drins Tech Limited · Dhaka, Bangladesh",
+      "period": "Jul 2015 – Dec 2015",
+      "highlights": [
+        "Worked mainly on the back end of a university management system: ASP.NET Web API on .NET Framework with SQL Server, and an AngularJS front end where needed",
+        "Wrote the accounting reports: SQL queries and RDLC report definitions"
+      ]
+    },
+    {
+      "title": "Junior Software Engineer",
+      "company": "Communica Limited",
+      "period": "Jul 2014 – Jun 2015",
+      "highlights": [
+        "Built a Smart Point-of-Sale application with inventory and basic accounting reports",
+        "Worked directly with clients and supported live installations"
+      ]
+    }
+  ]
+}
