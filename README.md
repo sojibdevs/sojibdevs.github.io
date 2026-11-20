@@ -18,4 +18,4 @@ In the repo settings, Pages, set Source to "GitHub Actions".
 
 ## Update the CV
 
-Replace `public/cv.pdf`.
+Replace `public/Md_Sojib_Miya_CV.pdf`.

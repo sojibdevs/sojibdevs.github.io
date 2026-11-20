@@ -183,14 +183,16 @@
         "Unit and integration-style data-access and API-client tests, and pipelines publishing the worker deployables",
         "Player image pipeline that validates, resizes and publishes photos to blob storage"
       ],
-      "role": "Lead backend engineer and solution architect on the American football platform (schema, clean-architecture refactor, use cases, outbox, testing, CI/CD); built the football, cricket and basketball ETL services on the same patterns."
+      "role": "Lead backend engineer and solution architect on the American football platform (schema, clean-architecture refactor, use cases, outbox, testing, CI/CD); built the football, cricket and basketball ETL services on the same patterns.",
+      "diagram": "diagrams/sports-etl-architecture.svg",
+      "diagramAlt": "Architecture: provider feed to ingestion workers, use cases and data access into SQL Server with an outbox table, then an outbox publisher to RabbitMQ and typed consumers"
     },
     {
       "slug": "fantasy-sports-platform",
       "icon": "Shield",
       "title": "Fantasy Sports Platform (in progress)",
       "summary": "Multi-tenant fantasy sports back end: daily contest creation, and leaderboard workers that consume match events idempotently. American football is implemented; the platform did not reach full release.",
-      "description": "A white-label fantasy sports platform on .NET 8 and SQL Server. A contest-creation worker creates American football tournaments daily. A leaderboard worker consumes match events from the sports data services over RabbitMQ, applies them with a per-match checkpoint, updates points in one transaction, and polls for matches whose events were missed. Each white-label operator has its own database, resolved per request. The leaderboard side was only partly finished: American football is implemented end to end, other sports are stubbed, and prize calculation is a placeholder.",
+      "description": "A white-label fantasy sports platform on .NET 8 and SQL Server. A contest-creation worker creates American football tournaments daily. A leaderboard worker subscribes to match status events published by the sports data services over RabbitMQ, applies them with a per-match checkpoint, updates points in one transaction, and polls for matches whose events were missed. Each white-label operator has its own database, resolved per request. The leaderboard side was only partly finished: American football is implemented end to end, other sports are stubbed, and prize calculation is a placeholder.",
       "technologies": [
         "C#",
         ".NET 8",
@@ -207,14 +209,16 @@
       ],
       "outcomes": [
         "Daily scheduled worker that creates American football tournaments, with run-now override and retry policy",
-        "Event consumer plus checkpoint on the source-updated timestamp, so duplicate or older events are skipped",
+        "Leaderboard worker subscribes (EasyNetQ AutoSubscribe) to match-updated and match-final events published by the sports data services and starts leaderboard processing; a checkpoint on the source-updated timestamp skips duplicate or older events",
         "Polling hosted service that finds matches with pending updates and reprocesses them when events were missed",
         "One database transaction per match: player points, team totals and tournament-match final state are updated together",
         "Database-per-operator tenancy resolved per request from the broker context and bound to the caller through a JWT claim",
         "Per-sport processing entry points in place (football, cricket, basketball, baseball, hockey) pending implementation",
         "Unit and integration-style data-access tests for contest, team and settings commands and queries"
       ],
-      "role": "Lead backend architect and principal .NET engineer: designed the tenancy model and event-driven leaderboard flow, built the APIs, workers and data-access layer."
+      "role": "Lead backend architect and principal .NET engineer: designed the tenancy model and event-driven leaderboard flow, built the APIs, workers and data-access layer.",
+      "diagram": "diagrams/fantasy-architecture.svg",
+      "diagramAlt": "Architecture: RabbitMQ match events to the leaderboard worker, checkpoint and a single transaction updating the operator database, with a polling fallback, a daily contest worker and the API"
     },
     {
       "slug": "clean-architecture-reference",
@@ -250,8 +254,8 @@
       "slug": "textile-erp",
       "icon": "Database",
       "title": "Textile ERP (Inventory & Setup Framework)",
-      "summary": "An internal ERP for a textile unit (2018 to 2021): I worked on the Inventory module and other modules, wrote a metadata-driven setup framework, and sped up a daily management report. Not all modules were completed.",
-      "description": "An ASP.NET MVC and Web API system for a textile unit within a group of several garments units, replacing paper and spreadsheet tracking. The codebase has 548 entities and 159 controllers across yarn procurement, inventory, knitting, R&D and lab testing, costing and booking analysis. Not every module was completed during my time. I worked on the Inventory module (yarn receive, QC, issue, return, transfer and requisition) and several other modules, wrote the Common Interface framework for setup pages, optimised a daily management report, and gathered requirements directly from factory teams.",
+      "summary": "An internal ERP for a textile unit (2018 to 2021): I worked on eight modules, wrote a metadata-driven setup framework, and sped up a daily management report. Most modules were still in progress when I left.",
+      "description": "An ASP.NET MVC and Web API system for a textile unit within a group of several garments units, replacing paper and spreadsheet tracking. The codebase has 548 entities and 159 controllers. I worked on the Inventory, Yarn Inventory (including yarn dyeing), Knitting, Production (grey fabric), Wash, CDA (Chemicals, Dyes and Auxiliaries store), Supply Chain (import LC, PI, purchase order) and Booking Analysis modules, most of which were still in progress when I left. I also wrote the Common Interface framework for setup pages, optimised a daily management report, and gathered requirements directly from factory teams.",
       "technologies": [
         "C#",
         ".NET Framework 4.7",
@@ -268,11 +272,11 @@
         "Avoiding a new controller, view and script for every setup table"
       ],
       "outcomes": [
-        "Inventory module (among other modules): yarn receive, receive QC, issue, issue return, transfer and requisition screens backed by the ERP's repository and specification layers",
+        "Module work across stock and production flows: yarn receive, issue, return and transfer; knitting; grey-fabric production and QC; wash batches and requisitions; CDA (Chemicals, Dyes and Auxiliaries) floor and QC requisitions and rack/bin allocation; import LC, PI and purchase-order screens; booking analysis",
         "Common Interface: a metadata-driven setup-page framework (screen, fields, grids, lookups and SQL stored as configuration rows, served by one generic API and view), so new setup pages need no new code",
         "Daily management report cut from about 10 minutes to 1 to 2 minutes through SQL rewrites, indexing and an API"
       ],
-      "role": "Senior engineer: worked on the Inventory module and other modules, wrote Common Interface, and informally mentored and led a small team without a formal title."
+      "role": "Senior engineer: worked on eight modules, wrote Common Interface, and informally mentored and led a small team without a formal title."
     }
   ],
   "experience": [
@@ -299,7 +303,7 @@
         "Brokerage billing: designed a pipeline for trade-file and clearer (SFTP) ingestion, position roll-up, per-lot brokerage and monthly PDF/CSV invoices; led the port of a legacy .NET Framework system to a layered .NET 5/6 application",
         "OTC equity back office: built an 8-step deposit-form wizard that generates compliance PDFs",
         "Sports data ETL: lead backend engineer and solution architect for .NET 8 services for American football, football, cricket and basketball, with staging-table MERGE upserts and a SQL outbox relay (READPAST/UPDLOCK claiming, stuck-lock reset, backoff with jitter) publishing typed events to RabbitMQ",
-        "Fantasy sports platform (partly built): multi-tenant contest and leaderboard back end with a checkpoint table, polling fallback and transactional scoring updates; American football implemented",
+        "Fantasy sports platform (partly built): multi-tenant contest and leaderboard back end; a worker subscribes to match status events from the sports data services and starts leaderboard processing, with a checkpoint table, polling fallback and transactional scoring updates; American football implemented",
         "Support systems: main author of a risk-support API and admin UI (live match monitor over SignalR fed by a RabbitMQ consumer, withdrawal approvals, FXBO integration); contributed to fund-reporting and risk-dashboard products",
         "Wrote a Dapper wrapper and shared libraries (test utilities, database configuration, event contracts); maintained CI pipelines across more than ten repositories"
       ]
@@ -310,7 +314,7 @@
       "period": "Sep 2018 – Dec 2021",
       "highlights": [
         "Senior engineer on a textile ERP built from scratch (ASP.NET MVC 5, Web API 2, SQL Server; 548 entities, 159 controllers); not all modules were completed during my time",
-        "Worked on the Inventory module (yarn receive, QC, issue, return, transfer, requisition) and other modules",
+        "Worked on the Inventory, Yarn Inventory (including yarn dyeing), Knitting, Production (grey fabric), Wash, CDA (Chemicals, Dyes and Auxiliaries store), Supply Chain (import LC, PI, purchase order) and Booking Analysis modules; most were still in progress when I left",
         "Designed 'Common Interface', a metadata-driven framework for setup pages: screens, fields, grids, lookups and SQL are defined as database rows and rendered by one generic API and view, so a new setup page needs no new back-end or front-end code",
         "Built, as sole developer, an audit and compliance management system (ASP.NET MVC 5, Web API 2, EF6, Autofac, FluentValidation, RDLC): configurable question templates with sections and weights, audits with scopes, findings and formulas, and certificate tracking with history",
         "Built a Supplier Portal (ASP.NET MVC, pdfSharp, jQuery, Bootstrap, dhtmlx, SQL Server), live internally since 2019: imports export-garment sales orders from merchants, processes uploaded purchase-requisition PDFs and prepares supplier requirement requisitions for the ERP",

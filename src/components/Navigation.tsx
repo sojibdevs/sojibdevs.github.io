@@ -1,4 +1,4 @@
-import { CV_URL, trackCvDownload } from '@/lib/analytics';
+import { CV_URL, CV_FILE, trackCvDownload } from '@/lib/analytics';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -52,7 +52,7 @@ export function Navigation() {
           ))}
           <li>
             <Button variant="heroOutline" size="sm" asChild>
-              <a href={CV_URL} download onClick={() => trackCvDownload("nav")}>Resume</a>
+              <a href={CV_URL} download={CV_FILE} onClick={() => trackCvDownload("nav")}>Resume</a>
             </Button>
           </li>
         </ul>
@@ -89,7 +89,7 @@ export function Navigation() {
             ))}
             <li className="mt-2">
               <Button variant="heroOutline" size="sm" asChild>
-                <a href={CV_URL} download onClick={() => trackCvDownload("nav-mobile")}>Resume</a>
+                <a href={CV_URL} download={CV_FILE} onClick={() => trackCvDownload("nav-mobile")}>Resume</a>
               </Button>
             </li>
           </ul>

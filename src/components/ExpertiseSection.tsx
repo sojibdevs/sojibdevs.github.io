@@ -9,7 +9,7 @@ export function ExpertiseSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="expertise" className="py-24 relative" aria-label="Core expertise and technical skills">
+    <section id="expertise" className="py-16 md:py-20 relative" aria-label="Core expertise and technical skills">
       <div className="section-container">
         <motion.div
           ref={ref}

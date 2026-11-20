@@ -51,6 +51,21 @@ export default function ProjectDetail() {
             <p className="text-muted-foreground leading-relaxed text-lg mb-8">{project.description}</p>
 
             <div className="space-y-8">
+              {/* Architecture diagram */}
+              {(project as { diagram?: string }).diagram && (
+                <div>
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">Architecture</p>
+                  <div className="card-elevated p-3 overflow-x-auto">
+                    <img
+                      src={`${import.meta.env.BASE_URL}${(project as { diagram?: string }).diagram}`}
+                      alt={(project as { diagramAlt?: string }).diagramAlt ?? 'Architecture diagram'}
+                      className="w-full min-w-[640px] h-auto"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              )}
+
               {/* Role */}
               <div className="card-elevated p-5">
                 <p className="text-xs font-medium text-primary uppercase tracking-wider mb-2">My Role</p>

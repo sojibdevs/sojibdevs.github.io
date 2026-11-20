@@ -9,7 +9,7 @@ export function ExperienceSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="experience" className="py-24 relative" aria-label="Professional experience as a Senior .NET Developer">
+    <section id="experience" className="py-16 md:py-20 relative" aria-label="Professional experience as a Senior .NET Developer">
       <div className="section-container">
         <motion.div
           ref={ref}

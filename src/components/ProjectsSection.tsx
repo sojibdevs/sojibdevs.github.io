@@ -16,7 +16,7 @@ const itemVariants: Variants = {
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-24 bg-muted/30" aria-label="Selected enterprise projects and delivery outcomes">
+    <section id="projects" className="py-16 md:py-20 bg-muted/30" aria-label="Selected enterprise projects and delivery outcomes">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

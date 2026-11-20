@@ -2,13 +2,19 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import data from '@/data/data.json';
+import { Badge } from '@/components/ui/badge';
+
+const coreStack = [
+  'C#', '.NET 8', 'ASP.NET Core', 'SQL Server', 'T-SQL', 'Dapper', 'EF Core',
+  'RabbitMQ', 'SignalR', 'Hangfire', 'Blazor', 'Azure DevOps',
+];
 
 export function AboutSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-24 relative" aria-label="About">
+    <section id="about" className="py-16 md:py-20 relative" aria-label="About">
       <div className="section-container">
         <motion.div
           ref={ref}
@@ -45,9 +51,20 @@ export function AboutSection() {
               </p>
 
               <p className="text-muted-foreground leading-relaxed">
-                I work remotely with a US product team today and am open to contract or full-time roles,
-                including relocation to Dublin.
+                I work remotely with a US product team today and am open to remote contract or full-time roles,
+                and to relocation for the right team.
               </p>
+
+              <div className="pt-4">
+                <p className="font-mono text-primary text-sm mb-3">Core stack</p>
+                <div className="flex flex-wrap gap-2">
+                  {coreStack.map((tech) => (
+                    <Badge key={tech} variant="secondary" className="bg-secondary/50 text-secondary-foreground font-mono text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <aside className="relative">

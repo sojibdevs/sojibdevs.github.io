@@ -1,4 +1,4 @@
-import { CV_URL, trackCvDownload } from '@/lib/analytics';
+import { CV_URL, CV_FILE, trackCvDownload } from '@/lib/analytics';
 import { motion } from 'framer-motion';
 import { ArrowDown, Download, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -77,7 +77,7 @@ export function HeroSection() {
             className="flex flex-wrap gap-4 mb-12"
           >
             <Button variant="hero" size="lg" asChild>
-              <a href={CV_URL} download onClick={() => trackCvDownload("hero")}>
+              <a href={CV_URL} download={CV_FILE} onClick={() => trackCvDownload("hero")}>
                 <Download className="mr-2 h-5 w-5" />
                 Download CV
               </a>
@@ -97,7 +97,7 @@ export function HeroSection() {
             className="flex items-center gap-2 text-sm text-muted-foreground"
           >
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span>Open to: contract and full-time roles · remote with US/EU overlap · relocation to Dublin</span>
+            <span>Open to: contract and full-time roles · remote worldwide · open to relocation</span>
           </motion.div>
         </motion.div>
 

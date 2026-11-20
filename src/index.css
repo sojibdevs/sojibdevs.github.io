@@ -100,7 +100,7 @@
 
 @layer components {
   .section-container {
-    @apply max-w-5xl mx-auto px-6 py-24;
+    @apply max-w-5xl mx-auto px-6;
   }
 
   .text-gradient {

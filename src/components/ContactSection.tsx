@@ -26,8 +26,8 @@ const contactLinks = [
 ];
 
 const engagementTypes = [
-  'Remote contracts with US or EU time-zone overlap',
-  'Full-time roles, including relocation to Dublin',
+  'Remote contracts with flexible time-zone overlap',
+  'Full-time roles, remote or with relocation',
   'Long-term or project-based engagements',
   'Architecture and code reviews for .NET back ends',
 ];
@@ -44,7 +44,7 @@ export function ContactSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="contact" className="py-24 relative" aria-label="Contact for .NET contract opportunities">
+    <section id="contact" className="py-16 md:py-20 relative" aria-label="Contact for .NET contract opportunities">
       <div className="section-container">
         <motion.div
           ref={ref}
