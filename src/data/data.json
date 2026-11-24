@@ -87,7 +87,7 @@
       "icon": "Layers",
       "title": "Credit-Eligibility Platform",
       "summary": "Ingests financial statements from PDF, spreadsheets, bank files and accounting exports, then scores companies for short-term credit eligibility.",
-      "description": "The Intelligent Financial Assistant, a .NET 8 finance platform for short-term credit eligibility. Client companies are onboarded and approved by an admin team after review, then submit about three years of historical statements plus ongoing annual, monthly and bank statements (PDF, CSV, XLSX). ETL pipelines normalise balance sheets and income statements and compute metrics such as liquidity and debt-to-equity, while RabbitMQ workers run the processing with real-time status over SignalR. Blazor portals give admins and clients grid, pivot and chart reporting. I designed and built it end to end over more than three years: architecture, database, APIs, Blazor front ends and workers. It is in production and still evolving.",
+      "description": "The Intelligent Financial Assistant, a .NET 8 finance platform for short-term credit eligibility. Client companies are onboarded and approved by an admin team after review, then submit about three years of historical statements plus ongoing annual, monthly and bank statements (PDF, CSV, XLSX). ETL pipelines normalise balance sheets and income statements and compute metrics such as liquidity and debt-to-equity, while RabbitMQ workers run the processing with real-time status over SignalR. Blazor portals give admins and clients grid, pivot and chart reporting. I designed and built it end to end over more than three years: architecture, database, APIs, Blazor front ends and workers. It ships as six deployables: the Admin app, the Client app, the Admin API, the Client API, a PDF-processing service and a custom-ingestion background worker. It is in production and still evolving.",
       "technologies": [
         "C#",
         ".NET 8",
@@ -112,43 +112,12 @@
         "Accounting-ratio engine (liquidity, solvency, coverage, turnover) on decimal arithmetic",
         "RabbitMQ-driven workers with real-time status to the browser over SignalR",
         "Blazor admin and client portals with Syncfusion grids, pivot tables and charts, Excel export and a step-by-step monthly upload wizard",
-        "Admin side: a 46-page Blazor Server admin app on a separate Admin API with its own JWT and CORS settings, a staged client and borrower approval workflow, master data management and a daily onboarding-progress monitor",
+        "Admin side: a 46-page Blazor Server admin app on a separate Admin API with its own JWT and CORS settings, admin user management with Admin and Operations roles, a staged client and borrower approval workflow, master data management and a daily onboarding-progress monitor",
         "APIs for client onboarding, admin approval and statement uploads, including re-upload of an already processed month",
-        "187 versioned database migrations managed with DbUp"
+        "187 versioned database migrations managed with DbUp",
+        "Six deployables: Admin app, Client app, Admin API, Client API, PDF service and custom background worker"
       ],
       "role": "Full-stack engineer and principal engineer on the platform: architecture, database design, APIs, ETL and workers, and the Blazor front ends."
-    },
-    {
-      "slug": "brokerage-billing-platform",
-      "icon": "Zap",
-      "title": "Brokerage Back-Office & Billing",
-      "summary": "Automates trade ingestion, position roll-up, brokerage calculation and monthly invoicing for a futures and options introducing broker.",
-      "description": "A back-office system that loads trade files and clearer data, rolls trades into positions, calculates per-lot brokerage and generates monthly invoices as PDF and CSV for email delivery. I led the port of a legacy .NET Framework billing system to a layered .NET 5/6 application, and later built a sister product for OTC equity order and fill capture.",
-      "technologies": [
-        "C#",
-        ".NET 6",
-        "ASP.NET Core",
-        "SQL Server",
-        "Dapper",
-        "Kendo UI",
-        "SFTP",
-        "Telerik PDF"
-      ],
-      "challenges": [
-        "De-duplicating trades across files that identify the same trade differently",
-        "Resolving a broker code from any of several alias columns",
-        "Keeping web requests fast while long jobs (file load, invoicing, sending) run elsewhere",
-        "Isolating data between broker legal entities"
-      ],
-      "outcomes": [
-        "Worker pipeline: file load, roll-up, brokerage, validation, invoicing and sending, driven by job rows",
-        "Brokerage rules covering per-lot, per-trade, percentage and split-party rates, plus OTC trades",
-        "Invoice generation per client and currency with PDF and CSV output",
-        "Idempotent clearer-file ingestion over SFTP",
-        "Broker-entity multi-tenancy through JWT claims",
-        "OTC equity module with an 8-step deposit-form wizard that generates compliance PDFs"
-      ],
-      "role": "Designed the pipeline and led the legacy port, working with a small team under a product owner."
     },
     {
       "slug": "sports-data-etl-services",
@@ -190,37 +159,39 @@
       "diagramAlt": "Architecture: provider feed to ingestion workers, use cases and data access into SQL Server with an outbox table, then an outbox publisher to RabbitMQ and typed consumers"
     },
     {
-      "slug": "fantasy-sports-platform",
-      "icon": "Shield",
-      "title": "Fantasy Sports Platform (in progress)",
-      "summary": "Multi-tenant fantasy sports back end: daily contest creation, and leaderboard workers that consume match events idempotently. American football is implemented; the platform did not reach full release.",
-      "description": "A white-label fantasy sports platform on .NET 8 and SQL Server. A contest-creation worker creates American football tournaments daily. A leaderboard worker subscribes to match status events published by the sports data services over RabbitMQ, applies them with a per-match checkpoint, updates points in one transaction, and polls for matches whose events were missed. Each white-label operator has its own database, resolved per request. The leaderboard side was only partly finished: American football is implemented end to end, other sports are stubbed, and prize calculation is a placeholder.",
+      "slug": "textile-erp",
+      "icon": "Database",
+      "title": "Textile ERP (Inventory & Setup Framework)",
+      "summary": "An internal ERP for a textile unit (2018 to 2021): I worked on eight modules, built a custom fine-grained permission engine, wrote a metadata-driven setup framework, and sped up a daily management report. Most modules were still in progress when I left.",
+      "description": "An ASP.NET MVC and Web API system for a textile unit within a group of several garments units, replacing paper and spreadsheet tracking. The codebase has 548 entities and 159 controllers. I worked on the Inventory, Yarn Inventory (including yarn dyeing), Knitting, Production (grey fabric), Wash, CDA (Chemicals, Dyes and Auxiliaries store), Supply Chain (import LC, PI, purchase order) and Booking Analysis modules, most of which were still in progress when I left. I designed and implemented a custom fine-grained role-based access control engine (menu and security rules, with per-user and per-group permissions at screen and action level), with ASP.NET Identity and OWIN cookie sign-in for the web app and custom JWT bearer authentication for the API. I also wrote the Common Interface framework, in which each setup screen's fields, grids, lookups and SQL are stored as database rows and rendered by one generic API and view, and which the audit and compliance system I built also reuses, optimised a daily management report, and gathered requirements directly from factory teams.",
       "technologies": [
         "C#",
-        ".NET 8",
+        ".NET Framework 4.7",
+        "ASP.NET MVC",
+        "Web API",
         "SQL Server",
+        "EF6",
         "Dapper",
-        "RabbitMQ",
-        "EasyNetQ",
-        "Azure Blob Storage"
+        "Autofac",
+        "ASP.NET Identity",
+        "OWIN",
+        "JWT"
       ],
       "challenges": [
-        "Keeping leaderboards correct when events arrive twice, late or not at all",
-        "Isolating each white-label operator's data while sharing one API",
-        "Structuring the contest and leaderboard logic so more sports can be added"
+        "Letting different people and groups see and change only their own screens and actions across dozens of modules",
+        "Keeping stock transactions (receive, QC, issue, return, transfer) consistent across a long production chain",
+        "A management report that took about 10 minutes every morning",
+        "Avoiding a new controller, view and script for every setup table"
       ],
       "outcomes": [
-        "Daily scheduled worker that creates American football tournaments, with run-now override and retry policy",
-        "Leaderboard worker subscribes (EasyNetQ AutoSubscribe) to match-updated and match-final events published by the sports data services and starts leaderboard processing; a checkpoint on the source-updated timestamp skips duplicate or older events",
-        "Polling hosted service that finds matches with pending updates and reprocesses them when events were missed",
-        "One database transaction per match: player points, team totals and tournament-match final state are updated together",
-        "Database-per-operator tenancy resolved per request from the broker context and bound to the caller through a JWT claim",
-        "Per-sport processing entry points in place (football, cricket, basketball, baseball, hockey) pending implementation",
-        "Unit and integration-style data-access tests for contest, team and settings commands and queries"
+        "Custom RBAC engine: menu and security rules mapped to groups and users, with per-menu select, insert, update and delete permissions plus feature and report rules, instead of attribute-based roles",
+        "Hybrid authentication: ASP.NET Identity with OWIN cookies for the MVC app and a custom JWT bearer scheme (authorization attribute and custom principal) for the Web API",
+        "Permission model details: security rules grouped under user groups, with per-menu select, insert, update and delete flags, feature and report rules, and a per-user, per-application and per-company menu tree served by a stored procedure; the Web API's authorization attribute is applied across 138 controllers",
+        "Module work across stock and production flows: yarn receive, issue, return and transfer; knitting; grey-fabric production and QC; wash batches and requisitions; CDA (Chemicals, Dyes and Auxiliaries) floor and QC requisitions and rack/bin allocation; import LC, PI and purchase-order screens; booking analysis",
+        "Common Interface: a metadata-driven setup-page framework (screen, fields, grids, lookups and SQL stored as configuration rows, served by one generic API and view), so new setup pages need no new code; it is also reused by the audit and compliance system I built",
+        "Daily management report cut from about 10 minutes to 1 to 2 minutes through SQL rewrites, indexing and an API"
       ],
-      "role": "Sole author: designed the multi-tenant, database-per-operator model and the event-driven leaderboard flow, and built the APIs, workers and data-access layer.",
-      "diagram": "diagrams/fantasy-architecture.svg",
-      "diagramAlt": "Architecture: RabbitMQ match events to the leaderboard worker, checkpoint and a single transaction updating the operator database, with a polling fallback, a daily contest worker and the API"
+      "role": "Senior engineer: worked on eight modules, designed and implemented the permission engine, wrote Common Interface, and informally mentored and led a small team without a formal title."
     },
     {
       "slug": "support-monitor",
@@ -256,6 +227,71 @@
       "role": "Designed and built the platform end to end: database scripts, project architecture, back-end API and front end."
     },
     {
+      "slug": "fantasy-sports-platform",
+      "icon": "Shield",
+      "title": "Fantasy Sports Platform (in progress)",
+      "summary": "Multi-tenant fantasy sports back end: daily contest creation, and leaderboard workers that consume match events idempotently. American football is implemented; the platform did not reach full release.",
+      "description": "A white-label fantasy sports platform on .NET 8 and SQL Server. A contest-creation worker creates American football tournaments daily. A leaderboard worker subscribes to match status events published by the sports data services over RabbitMQ, applies them with a per-match checkpoint, updates points in one transaction, and polls for matches whose events were missed. Each white-label operator has its own database, resolved per request. The leaderboard side was only partly finished: American football is implemented end to end, other sports are stubbed, and prize calculation is a placeholder.",
+      "technologies": [
+        "C#",
+        ".NET 8",
+        "SQL Server",
+        "Dapper",
+        "RabbitMQ",
+        "EasyNetQ",
+        "Azure Blob Storage"
+      ],
+      "challenges": [
+        "Keeping leaderboards correct when events arrive twice, late or not at all",
+        "Isolating each white-label operator's data while sharing one API",
+        "Structuring the contest and leaderboard logic so more sports can be added"
+      ],
+      "outcomes": [
+        "Daily scheduled worker that creates American football tournaments, with run-now override and retry policy",
+        "Leaderboard worker subscribes (EasyNetQ AutoSubscribe) to match-updated and match-final events published by the sports data services and starts leaderboard processing; a checkpoint on the source-updated timestamp skips duplicate or older events",
+        "Polling hosted service that finds matches with pending updates and reprocesses them when events were missed",
+        "One database transaction per match: player points, team totals and tournament-match final state are updated together",
+        "Database-per-operator tenancy resolved per request from the broker context and bound to the caller through a JWT claim",
+        "Per-sport processing entry points in place (football, cricket, basketball, baseball, hockey) pending implementation",
+        "Unit and integration-style data-access tests for contest, team and settings commands and queries"
+      ],
+      "role": "Sole author: designed the multi-tenant, database-per-operator model and the event-driven leaderboard flow, and built the APIs, workers and data-access layer.",
+      "diagram": "diagrams/fantasy-architecture.svg",
+      "diagramAlt": "Architecture: RabbitMQ match events to the leaderboard worker, checkpoint and a single transaction updating the operator database, with a polling fallback, a daily contest worker and the API"
+    },
+    {
+      "slug": "brokerage-billing-platform",
+      "icon": "Zap",
+      "title": "Brokerage Back-Office & Billing",
+      "summary": "Automates trade ingestion, position roll-up, brokerage calculation and monthly invoicing for a futures and options introducing broker.",
+      "description": "A back-office system that loads trade files and clearer data, rolls trades into positions, calculates per-lot brokerage and generates monthly invoices as PDF and CSV for email delivery. I led the port of a legacy .NET Framework billing system to a layered .NET 5/6 application, and later built a sister product for OTC equity order and fill capture.",
+      "technologies": [
+        "C#",
+        ".NET 6",
+        "ASP.NET Core",
+        "SQL Server",
+        "Dapper",
+        "Kendo UI",
+        "SFTP",
+        "Telerik PDF"
+      ],
+      "challenges": [
+        "De-duplicating trades across files that identify the same trade differently",
+        "Resolving a broker code from any of several alias columns",
+        "Keeping web requests fast while long jobs (file load, invoicing, sending) run elsewhere",
+        "Isolating data between broker legal entities"
+      ],
+      "outcomes": [
+        "Worker pipeline: file load, roll-up, brokerage, validation, invoicing and sending, driven by job rows",
+        "Brokerage rules covering per-lot, per-trade, percentage and split-party rates, plus OTC trades",
+        "Invoice generation per client and currency with PDF and CSV output",
+        "Idempotent clearer-file ingestion over SFTP",
+        "Broker-entity multi-tenancy through JWT claims",
+        "OTC equity module with an 8-step deposit-form wizard that generates compliance PDFs"
+      ],
+      "role": "Designed the pipeline and led the legacy port, working with a small team under a product owner."
+    },
+    {
       "slug": "clean-architecture-reference",
       "icon": "Brain",
       "title": "Clean Architecture Reference Platform",
@@ -284,40 +320,6 @@
         "Hybrid data access: EF Core for writes with audit snapshots, Dapper for reads"
       ],
       "role": "Designed and built the reference platform and wrote the executive brief and developer guide."
-    },
-    {
-      "slug": "textile-erp",
-      "icon": "Database",
-      "title": "Textile ERP (Inventory & Setup Framework)",
-      "summary": "An internal ERP for a textile unit (2018 to 2021): I worked on eight modules, built a custom fine-grained permission engine, wrote a metadata-driven setup framework, and sped up a daily management report. Most modules were still in progress when I left.",
-      "description": "An ASP.NET MVC and Web API system for a textile unit within a group of several garments units, replacing paper and spreadsheet tracking. The codebase has 548 entities and 159 controllers. I worked on the Inventory, Yarn Inventory (including yarn dyeing), Knitting, Production (grey fabric), Wash, CDA (Chemicals, Dyes and Auxiliaries store), Supply Chain (import LC, PI, purchase order) and Booking Analysis modules, most of which were still in progress when I left. I designed and implemented a custom fine-grained role-based access control engine (menu and security rules, with per-user and per-group permissions at screen and action level), with ASP.NET Identity and OWIN cookie sign-in for the web app and custom JWT bearer authentication for the API. I also wrote the Common Interface framework for setup pages, optimised a daily management report, and gathered requirements directly from factory teams.",
-      "technologies": [
-        "C#",
-        ".NET Framework 4.7",
-        "ASP.NET MVC",
-        "Web API",
-        "SQL Server",
-        "EF6",
-        "Dapper",
-        "Autofac",
-        "ASP.NET Identity",
-        "OWIN",
-        "JWT"
-      ],
-      "challenges": [
-        "Letting different people and groups see and change only their own screens and actions across dozens of modules",
-        "Keeping stock transactions (receive, QC, issue, return, transfer) consistent across a long production chain",
-        "A management report that took about 10 minutes every morning",
-        "Avoiding a new controller, view and script for every setup table"
-      ],
-      "outcomes": [
-        "Custom RBAC engine: menu and security rules mapped to groups and users, with per-menu select, insert, update and delete permissions plus feature and report rules, instead of attribute-based roles",
-        "Hybrid authentication: ASP.NET Identity with OWIN cookies for the MVC app and a custom JWT bearer scheme (authorization attribute and custom principal) for the Web API",
-        "Module work across stock and production flows: yarn receive, issue, return and transfer; knitting; grey-fabric production and QC; wash batches and requisitions; CDA (Chemicals, Dyes and Auxiliaries) floor and QC requisitions and rack/bin allocation; import LC, PI and purchase-order screens; booking analysis",
-        "Common Interface: a metadata-driven setup-page framework (screen, fields, grids, lookups and SQL stored as configuration rows, served by one generic API and view), so new setup pages need no new code",
-        "Daily management report cut from about 10 minutes to 1 to 2 minutes through SQL rewrites, indexing and an API"
-      ],
-      "role": "Senior engineer: worked on eight modules, designed and implemented the permission engine, wrote Common Interface, and informally mentored and led a small team without a formal title."
     }
   ],
   "experience": [
@@ -341,7 +343,7 @@
       "period": "Dec 2021 – Apr 2026",
       "highlights": [
         "Emerald Capital credit-eligibility platform (in production since 2023): principal engineer and primary author. Owned the architecture, database, APIs, ETL workers and Blazor portals; built PDF statement extraction with Adobe PDF Services, multi-source ingestion with idempotent reloads, RabbitMQ workers with real-time SignalR status, and 187 versioned database migrations",
-        "Emerald Capital admin side: 46-page admin Blazor app on a separate Admin API with its own JWT and CORS settings, a staged client and borrower approval workflow, master data management, analytic grids and a daily onboarding-progress monitor",
+        "Emerald Capital admin side: 46-page admin Blazor app on a separate Admin API with its own JWT and CORS settings, admin user management with Admin and Operations roles, a staged client and borrower approval workflow, master data management, analytic grids and a daily onboarding-progress monitor. The platform ships as six deployables (Admin app, Client app, Admin API, Client API, PDF service, custom background worker)",
         "Fantasy sports platform (partly built): sole author. Built the multi-tenant, database-per-operator back end, daily contest creation and event-driven leaderboard processing that subscribes to match status events (American football implemented)",
         "Sports-data ETL services (American football, football, cricket, basketball): lead backend engineer and solution architect. Designed the schema and clean-architecture layout, built the ingestion workers, and added a SQL outbox relay publishing events to RabbitMQ",
         "Aqua Support Monitor (support and risk admin platform): designed and built it end to end, covering database scripts, a layered ASP.NET Core API (JWT issuing, endpoints restricted to a SupportAdmin role, SignalR live match monitor fed by RabbitMQ), an MVC admin UI with cookie sign-in from JWT claims, withdrawal approvals, KYC and payment screens, panic alerts and push notifications",
