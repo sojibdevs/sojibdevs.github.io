@@ -35,19 +35,22 @@ export function AboutSection() {
               <p className="text-muted-foreground leading-relaxed text-lg">
                 I am a <strong className="text-foreground font-medium">Senior .NET Developer</strong> based in Dhaka,
                 with 12+ years of experience building business-critical back ends: fintech platforms for credit assessment and brokerage billing,
-                event-driven sports-data pipelines, and enterprise ERP systems.
+                event-driven sports-data pipelines, admin back offices, and enterprise ERP systems.
               </p>
 
               <p className="text-muted-foreground leading-relaxed">
                 My core focus is <span className="text-primary">C# and SQL Server</span>: ingestion pipelines that load
                 data in bulk and stay safe to re-run, multi-tenant ASP.NET Core APIs, RabbitMQ-driven workers,
-                and legacy-to-modern migrations.
+                legacy-to-modern migrations, and access control for admin platforms (JWT and cookie authentication,
+                role-restricted portals and a custom fine-grained permission engine). I also have working knowledge of MySQL, PostgreSQL and MongoDB.
               </p>
 
               <p className="text-muted-foreground leading-relaxed">
                 I like owning a system end to end: gathering requirements from the people who use it,
                 designing the schema and architecture, writing the code, and supporting it afterwards.
-                I have led without a formal title: mentoring four senior engineers, sharing knowledge across the team, and running sprint planning, task assignment and code review.
+                At Epyllion I was the unofficial team lead on a textile ERP: I wrote the project architecture from scratch, made the framework and technology
+                decisions, mentored four senior engineers, and ran sprint planning, task assignment and code review. At Smart ABG I designed and built several
+                systems end to end, including a credit-eligibility platform in production and a support and risk admin platform.
               </p>
 
               <p className="text-muted-foreground leading-relaxed">

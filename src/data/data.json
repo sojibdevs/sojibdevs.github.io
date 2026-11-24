@@ -31,7 +31,8 @@
         "SqlBulkCopy and MERGE-based upserts",
         "Idempotent loads and explicit transactions",
         "Versioned migrations with DbUp",
-        "Reporting queries and dynamic CTE pagination"
+        "Reporting queries and dynamic CTE pagination",
+        "Working knowledge of MySQL, PostgreSQL and MongoDB"
       ]
     },
     {
@@ -161,7 +162,7 @@
     {
       "slug": "textile-erp",
       "icon": "Database",
-      "title": "Textile ERP (Inventory & Setup Framework)",
+      "title": "Textile ERP",
       "summary": "An internal ERP for a textile unit (2018 to 2021): I worked on eight modules, built a custom fine-grained permission engine, wrote a metadata-driven setup framework, and sped up a daily management report. Most modules were still in progress when I left.",
       "description": "An ASP.NET MVC and Web API system for a textile unit within a group of several garments units, replacing paper and spreadsheet tracking. The codebase has 548 entities and 159 controllers. I worked on the Inventory, Yarn Inventory (including yarn dyeing), Knitting, Production (grey fabric), Wash, CDA (Chemicals, Dyes and Auxiliaries store), Supply Chain (import LC, PI, purchase order) and Booking Analysis modules, most of which were still in progress when I left. I designed and implemented a custom fine-grained role-based access control engine (menu and security rules, with per-user and per-group permissions at screen and action level), with ASP.NET Identity and OWIN cookie sign-in for the web app and custom JWT bearer authentication for the API. I also wrote the Common Interface framework, in which each setup screen's fields, grids, lookups and SQL are stored as database rows and rendered by one generic API and view, and which the audit and compliance system I built also reuses, optimised a daily management report, and gathered requirements directly from factory teams.",
       "technologies": [
@@ -191,7 +192,7 @@
         "Common Interface: a metadata-driven setup-page framework (screen, fields, grids, lookups and SQL stored as configuration rows, served by one generic API and view), so new setup pages need no new code; it is also reused by the audit and compliance system I built",
         "Daily management report cut from about 10 minutes to 1 to 2 minutes through SQL rewrites, indexing and an API"
       ],
-      "role": "Senior engineer: worked on eight modules, designed and implemented the permission engine, wrote Common Interface, and informally mentored and led a small team without a formal title."
+      "role": "Senior engineer and unofficial team lead: wrote the project architecture from scratch, made the framework and technology decisions, worked on eight modules, built the permission engine and Common Interface, and mentored four senior engineers without a formal title."
     },
     {
       "slug": "support-monitor",
@@ -367,7 +368,7 @@
         "Built a Supplier Portal (ASP.NET MVC, pdfSharp, jQuery, Bootstrap, dhtmlx, SQL Server), live internally since 2019: imports export-garment sales orders from merchants, processes uploaded purchase-requisition PDFs and prepares supplier requirement requisitions for the ERP",
         "Built an Expense Management System (ASP.NET MVC, pdfSharp, jQuery, Bootstrap, dhtmlx)",
         "Cut a daily management report from about 10 minutes to 1 to 2 minutes with SQL rewrites, indexing and an API",
-        "Led without a formal title: mentored four senior software engineers, shared knowledge across the team, and ran sprint planning, task assignment and code review"
+        "Unofficial team lead: wrote the project architecture from scratch and made the framework and technology decisions; mentored four senior software engineers, shared knowledge across the team, and ran sprint planning, task assignment and code review"
       ]
     },
     {
