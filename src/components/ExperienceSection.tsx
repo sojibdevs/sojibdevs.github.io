@@ -19,7 +19,7 @@ export function ExperienceSection() {
         >
           <div className="flex items-center gap-4 mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              <span className="font-mono text-primary text-xl mr-2">04.</span>
+              <span className="font-mono text-primary text-xl mr-2">05.</span>
               Professional Experience
             </h2>
             <div className="h-px bg-border flex-1 max-w-xs" />

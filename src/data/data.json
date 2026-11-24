@@ -378,12 +378,12 @@
     {
       "title": "Freelance Software Engineer",
       "company": "Upwork",
-      "period": "Jun 2016 – Aug 2018",
+      "period": "Jun 2016 – 2024 (part-time alongside full-time roles from Sep 2018)",
       "highlights": [
-        "Eatsy Technologies (2017), a Singapore mobile order-ahead and payment app startup: designed the API architecture for the mobile and web apps and led the back end with two other developers; left before the project was completed",
+        "Eatsy Technologies (2016 to 2018), a Singapore mobile order-ahead and payment app startup: designed the API architecture for the mobile and web apps and led the back end with two other developers; left before the project was completed",
         "LeadScripts, an AI marketing-copy SaaS product: built the internal admin application and worked on the early OpenAI integration",
         "Delivered client work in C# and .NET, including ASP.NET Core APIs, clean-architecture web app updates and long-running maintenance contracts",
-        "Cloud integrations for clients: medical transcription and voice-to-text (AWS Transcribe Medical, AWS voice-to-text, Azure), AWS S3 integration and AWS deployment",
+        "Cloud integrations for clients: AWS S3 into a CRM with the .NET AWS SDK (2018), Azure speech-to-text proofs of concept and AWS Medical Transcribe (2020), and AWS deployment",
         "Top Rated freelancer: 39 contracts, 1,764 hours and a 100% Job Success Score; several clients left 5.0 reviews and endorsements"
       ]
     },
@@ -415,6 +415,125 @@
         "Built a Smart Point-of-Sale application with inventory and basic accounting reports",
         "Worked directly with clients and supported live installations"
       ]
+    }
+  ],
+  "services": [
+    {
+      "icon": "Shield",
+      "title": "Admin back offices and access control",
+      "problem": "Internal teams need to manage data, approve requests and control who can do what.",
+      "deliverables": [
+        "Role-restricted admin portals (ASP.NET Core MVC or Blazor)",
+        "JWT and cookie authentication, with claims-based sign-in",
+        "Approval workflows with an audit trail",
+        "Fine-grained per-user and per-group permissions"
+      ],
+      "proof": [
+        {
+          "slug": "support-monitor",
+          "label": "Support Monitor"
+        },
+        {
+          "slug": "textile-erp",
+          "label": "Textile ERP"
+        }
+      ]
+    },
+    {
+      "icon": "Database",
+      "title": "Data ingestion and ETL pipelines",
+      "problem": "Files, feeds and exports need to land in SQL Server reliably and be safe to re-run.",
+      "deliverables": [
+        "Bulk, re-runnable loads with SqlBulkCopy and MERGE upserts",
+        "RabbitMQ workers with live progress over SignalR",
+        "PDF, spreadsheet and CSV ingestion",
+        "Scheduled provider-feed services"
+      ],
+      "proof": [
+        {
+          "slug": "credit-eligibility-platform",
+          "label": "Credit-Eligibility Platform"
+        },
+        {
+          "slug": "sports-data-etl-services",
+          "label": "Sports Data ETL"
+        }
+      ]
+    },
+    {
+      "icon": "Layers",
+      "title": "Legacy .NET modernization and architecture review",
+      "problem": "An ageing .NET codebase is hard to change safely and slow to extend.",
+      "deliverables": [
+        "A layered target architecture with architecture tests that fail the build on violations",
+        "A migration path from a monolith to modular services",
+        "Tenant-aware data access and reusable list-view query pipelines",
+        "A written review and developer guide"
+      ],
+      "proof": [
+        {
+          "slug": "clean-architecture-reference",
+          "label": "Clean Architecture Reference"
+        },
+        {
+          "slug": "brokerage-billing-platform",
+          "label": "Brokerage Billing Platform"
+        }
+      ]
+    },
+    {
+      "icon": "Zap",
+      "title": "SQL Server performance audit",
+      "problem": "Slow reports and queries are costing your users time every day.",
+      "deliverables": [
+        "Query and index review",
+        "SQL rewrites and API changes where needed",
+        "Written findings with prioritised fixes"
+      ],
+      "proof": [
+        {
+          "slug": "textile-erp",
+          "label": "Textile ERP (a daily report cut from about 10 minutes to 1 to 2)"
+        }
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Sojib is an amazing worker. Extremely knowledgeable and very easy to work with. We have worked together through 2 projects. My project had many changes and Sojib was very flexible and over-delivered. He delivered on time and even out of scope changes were handled well. [...] HIGHLY RECOMMENDED!",
+      "project": "Reporting dashboard (ASP.NET MVC, OAuth2, API)",
+      "rating": "5.0",
+      "period": "Feb 2020 – Jan 2021"
+    },
+    {
+      "quote": "Most of the time I leave design and development responsibility to him and he never lets me down. Sojib is kind of a developer who is always willing to go extra mile and has helped me to develop application with top quality code. I would highly recommend him for .net core (UI & backend) work.",
+      "project": "ASP.NET Core development work",
+      "rating": "5.0",
+      "period": "Apr 2021"
+    },
+    {
+      "quote": "Sojib is a fantastic guy to work with and always there on a short notice when you need him. He is always willing to do extra and never lets you down. I'll definitely be in touch for any new work and will highly recommend him.",
+      "project": "ASP.NET Core Web API project architecture and API development",
+      "rating": "5.0",
+      "period": "Sep 2020 – Jan 2021"
+    },
+    {
+      "quote": "Sojib filled in my skills gap in challenging work that was over my head. He was able to get it done, and helped build a project that was necessary. He put in the hard work and delivered exactly what I needed on a timely basis. I would definitely hire him again on a project that I needed help with.",
+      "project": "AWS Medical Transcribe",
+      "rating": "5.0",
+      "period": "Jun – Sep 2020"
+    },
+    {
+      "quote": "Sojib and I worked together at Eatsy Technologies and he has been a tremendous team player and software developer for our company since day 1. [...] He never fails to go the extra mile to make sure he has given his best before he ends work every day. Sojib is a top-notch engineer who would have made a tremendous addition to any product development team!",
+      "project": "Restaurant CRM",
+      "rating": "5.0",
+      "period": "Nov 2016 – May 2018"
+    },
+    {
+      "quote": "Sojib is a pleasure to work with. Very thorough and a hard worker.",
+      "project": "ASP.NET Core clean architecture web app updates",
+      "rating": "5.0",
+      "period": "Dec 2022 – Aug 2023"
     }
   ]
 }
