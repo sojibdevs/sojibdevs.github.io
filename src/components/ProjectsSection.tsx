@@ -37,7 +37,7 @@ export function ProjectsSection() {
       </div>
 
       {/* Project grid */}
-      <div className="max-w-6xl mx-auto px-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="max-w-6xl mx-auto px-6 flex flex-wrap justify-center gap-6">
         {data.projects.map((project, index) => {
           const IconComponent = getIconComponent(project.icon);
           return (
@@ -47,7 +47,7 @@ export function ProjectsSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="h-full"
+              className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             >
               <Link
                 to={`/project/${project.slug}`}
