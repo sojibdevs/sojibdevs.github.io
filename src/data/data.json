@@ -118,7 +118,9 @@
         "187 versioned database migrations managed with DbUp",
         "Six deployables: Admin app, Client app, Admin API, Client API, PDF service and custom background worker"
       ],
-      "role": "Full-stack engineer and principal engineer on the platform: architecture, database design, APIs, ETL and workers, and the Blazor front ends."
+      "role": "Full-stack engineer and principal engineer on the platform: architecture, database design, APIs, ETL and workers, and the Blazor front ends.",
+      "diagram": "diagrams/credit-platform-architecture.svg",
+      "diagramAlt": "Architecture: Admin and Client Blazor apps call their own APIs, which use SQL Server, Azure Storage and RabbitMQ; PDF and custom background jobs consume messages and run ETL, and SignalR streams live progress back to both apps"
     },
     {
       "slug": "sports-data-etl-services",
