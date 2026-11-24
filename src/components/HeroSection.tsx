@@ -66,8 +66,8 @@ export function HeroSection() {
           >
             12+ years building C# back ends on SQL Server: a credit-eligibility
             platform in production, brokerage billing, event-driven data
-            pipelines and enterprise ERP systems. Strong on bulk and idempotent processing,
-            multi-tenant APIs and clean architecture.
+            pipelines, admin back offices and enterprise ERP systems. Strong on bulk and idempotent processing,
+            multi-tenant APIs, access control and clean architecture.
           </motion.p>
 
           <motion.div 
@@ -97,7 +97,7 @@ export function HeroSection() {
             className="flex items-center gap-2 text-sm text-muted-foreground"
           >
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span>Open to: contract and full-time roles · remote worldwide · open to relocation</span>
+            <span>Open to: contract and full-time roles · remote worldwide, US-overlap hours · open to relocation</span>
           </motion.div>
         </motion.div>
 

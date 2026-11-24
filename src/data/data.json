@@ -320,7 +320,9 @@
         "Six sign-in paths: password, one-time code, session token, impersonation and reset",
         "Hybrid data access: EF Core for writes with audit snapshots, Dapper for reads"
       ],
-      "role": "Designed and built the reference platform and wrote the executive brief and developer guide."
+      "role": "Designed and built the reference platform and wrote the executive brief and developer guide.",
+      "diagram": "diagrams/clean-architecture-reference.svg",
+      "diagramAlt": "Architecture: Presentation and worker projects depend on Application, which depends on Core; Infrastructure also depends on Core. A request carries the client name as a JWT claim, the connection factory looks up and decrypts the tenant database credentials, and data access uses EF Core writes and Dapper reads; architecture tests fail the build on layer violations"
     }
   ],
   "experience": [
