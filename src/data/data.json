@@ -3,6 +3,7 @@
     "12+ years building enterprise .NET back ends",
     "Fintech back offices: credit eligibility, brokerage billing, OTC equities",
     "Bulk, idempotent data pipelines and a SQL outbox relay publishing to RabbitMQ",
+    "Admin back offices and access control: fine-grained RBAC, JWT and cookie authentication, approval workflows",
     "Multi-tenant ASP.NET Core APIs, SignalR and RabbitMQ workers",
     "Mentored four senior engineers; Top Rated on Upwork (39 contracts, 100% Job Success)",
     "Earlier: enterprise ERP work at Epyllion, including a metadata-driven framework for setup screens",
@@ -17,7 +18,7 @@
         "ASP.NET Core, MVC and Web API design",
         "Layered and Clean Architecture, SOLID",
         "Repository, specification and unit-of-work patterns",
-        "JWT authentication, multi-tenant authorization",
+        "JWT and cookie authentication, fine-grained RBAC, multi-tenant authorization",
         "Legacy-to-modern system migrations"
       ]
     },
@@ -54,7 +55,7 @@
         "SFTP, REST and gRPC integrations",
         "Excel, CSV and accounting-export ingestion",
         "Email delivery pipelines",
-        "Azure Blob Storage"
+        "Azure Blob Storage; AWS S3 and speech-to-text integrations (freelance)"
       ]
     },
     {
@@ -111,6 +112,7 @@
         "Accounting-ratio engine (liquidity, solvency, coverage, turnover) on decimal arithmetic",
         "RabbitMQ-driven workers with real-time status to the browser over SignalR",
         "Blazor admin and client portals with Syncfusion grids, pivot tables and charts, Excel export and a step-by-step monthly upload wizard",
+        "Admin side: a 46-page Blazor Server admin app on a separate Admin API with its own JWT and CORS settings, a staged client and borrower approval workflow, master data management and a daily onboarding-progress monitor",
         "APIs for client onboarding, admin approval and statement uploads, including re-upload of an already processed month",
         "187 versioned database migrations managed with DbUp"
       ],
@@ -183,7 +185,7 @@
         "Unit and integration-style data-access and API-client tests, and pipelines publishing the worker deployables",
         "Player image pipeline that validates, resizes and publishes photos to blob storage"
       ],
-      "role": "Lead backend engineer and solution architect on the American football platform (schema, clean-architecture refactor, use cases, outbox, testing, CI/CD); built the football, cricket and basketball ETL services on the same patterns.",
+      "role": "Lead backend engineer and solution architect on the American football platform (schema, clean-architecture refactor, use cases, outbox, testing); built the football, cricket and basketball ETL services on the same patterns.",
       "diagram": "diagrams/sports-etl-architecture.svg",
       "diagramAlt": "Architecture: provider feed to ingestion workers, use cases and data access into SQL Server with an outbox table, then an outbox publisher to RabbitMQ and typed consumers"
     },
@@ -216,9 +218,42 @@
         "Per-sport processing entry points in place (football, cricket, basketball, baseball, hockey) pending implementation",
         "Unit and integration-style data-access tests for contest, team and settings commands and queries"
       ],
-      "role": "Lead backend architect and principal .NET engineer: designed the tenancy model and event-driven leaderboard flow, built the APIs, workers and data-access layer.",
+      "role": "Sole author: designed the multi-tenant, database-per-operator model and the event-driven leaderboard flow, and built the APIs, workers and data-access layer.",
       "diagram": "diagrams/fantasy-architecture.svg",
       "diagramAlt": "Architecture: RabbitMQ match events to the leaderboard worker, checkpoint and a single transaction updating the operator database, with a polling fallback, a daily contest worker and the API"
+    },
+    {
+      "slug": "support-monitor",
+      "icon": "Shield",
+      "title": "Support Monitor (Admin & Risk Platform)",
+      "summary": "A role-restricted support and risk admin platform: live match monitoring, withdrawal approvals, KYC and payment screens, panic alerts and push notifications. I designed and built it end to end.",
+      "description": "An internal admin platform for a support and risk team, built at Smart ABG. It has an ASP.NET Core API and an MVC admin UI. The API issues JWTs with user and role claims and restricts every admin endpoint to a SupportAdmin role. The UI signs users in with a cookie session built from the token's claims. A RabbitMQ consumer pushes live match events to the browser over SignalR. Admins can approve or reject withdrawal requests, check KYC and payment status, review panic-alert history and send Firebase push notifications. I designed and built the database scripts, project architecture, back-end API and front end.",
+      "technologies": [
+        "C#",
+        ".NET 5",
+        "ASP.NET Core",
+        "SQL Server",
+        "Dapper",
+        "SignalR",
+        "RabbitMQ",
+        "gRPC",
+        "Azure Pipelines"
+      ],
+      "challenges": [
+        "Giving support staff live visibility of matches without direct access to production data",
+        "Restricting a money-related admin surface to one trusted role, end to end (API and UI)",
+        "Keeping an audit trail for withdrawal decisions"
+      ],
+      "outcomes": [
+        "Layered API (Api, Core, Infrastructure, integration and migration projects) with Dapper data access and FluentValidation",
+        "JWT issued by the API with user and role claims; every admin controller requires the SupportAdmin role",
+        "MVC admin UI with cookie sign-in from JWT claims, plus login, registration and password-reset flows",
+        "Live match monitor: RabbitMQ consumer to SignalR hubs for match events, scores and panic alerts",
+        "Withdrawal approval screens, with status-change audit columns (who and when) added by a migration",
+        "KYC status, user payments, panic history and Firebase push-notification screens",
+        "Injection-hardening of filter parameters in the data services; versioned database scripts with DbUp"
+      ],
+      "role": "Designed and built the platform end to end: database scripts, project architecture, back-end API and front end."
     },
     {
       "slug": "clean-architecture-reference",
@@ -254,8 +289,8 @@
       "slug": "textile-erp",
       "icon": "Database",
       "title": "Textile ERP (Inventory & Setup Framework)",
-      "summary": "An internal ERP for a textile unit (2018 to 2021): I worked on eight modules, wrote a metadata-driven setup framework, and sped up a daily management report. Most modules were still in progress when I left.",
-      "description": "An ASP.NET MVC and Web API system for a textile unit within a group of several garments units, replacing paper and spreadsheet tracking. The codebase has 548 entities and 159 controllers. I worked on the Inventory, Yarn Inventory (including yarn dyeing), Knitting, Production (grey fabric), Wash, CDA (Chemicals, Dyes and Auxiliaries store), Supply Chain (import LC, PI, purchase order) and Booking Analysis modules, most of which were still in progress when I left. I also wrote the Common Interface framework for setup pages, optimised a daily management report, and gathered requirements directly from factory teams.",
+      "summary": "An internal ERP for a textile unit (2018 to 2021): I worked on eight modules, built a custom fine-grained permission engine, wrote a metadata-driven setup framework, and sped up a daily management report. Most modules were still in progress when I left.",
+      "description": "An ASP.NET MVC and Web API system for a textile unit within a group of several garments units, replacing paper and spreadsheet tracking. The codebase has 548 entities and 159 controllers. I worked on the Inventory, Yarn Inventory (including yarn dyeing), Knitting, Production (grey fabric), Wash, CDA (Chemicals, Dyes and Auxiliaries store), Supply Chain (import LC, PI, purchase order) and Booking Analysis modules, most of which were still in progress when I left. I designed and implemented a custom fine-grained role-based access control engine (menu and security rules, with per-user and per-group permissions at screen and action level), with ASP.NET Identity and OWIN cookie sign-in for the web app and custom JWT bearer authentication for the API. I also wrote the Common Interface framework for setup pages, optimised a daily management report, and gathered requirements directly from factory teams.",
       "technologies": [
         "C#",
         ".NET Framework 4.7",
@@ -264,19 +299,25 @@
         "SQL Server",
         "EF6",
         "Dapper",
-        "Autofac"
+        "Autofac",
+        "ASP.NET Identity",
+        "OWIN",
+        "JWT"
       ],
       "challenges": [
+        "Letting different people and groups see and change only their own screens and actions across dozens of modules",
         "Keeping stock transactions (receive, QC, issue, return, transfer) consistent across a long production chain",
         "A management report that took about 10 minutes every morning",
         "Avoiding a new controller, view and script for every setup table"
       ],
       "outcomes": [
+        "Custom RBAC engine: menu and security rules mapped to groups and users, with per-menu select, insert, update and delete permissions plus feature and report rules, instead of attribute-based roles",
+        "Hybrid authentication: ASP.NET Identity with OWIN cookies for the MVC app and a custom JWT bearer scheme (authorization attribute and custom principal) for the Web API",
         "Module work across stock and production flows: yarn receive, issue, return and transfer; knitting; grey-fabric production and QC; wash batches and requisitions; CDA (Chemicals, Dyes and Auxiliaries) floor and QC requisitions and rack/bin allocation; import LC, PI and purchase-order screens; booking analysis",
         "Common Interface: a metadata-driven setup-page framework (screen, fields, grids, lookups and SQL stored as configuration rows, served by one generic API and view), so new setup pages need no new code",
         "Daily management report cut from about 10 minutes to 1 to 2 minutes through SQL rewrites, indexing and an API"
       ],
-      "role": "Senior engineer: worked on eight modules, wrote Common Interface, and informally mentored and led a small team without a formal title."
+      "role": "Senior engineer: worked on eight modules, designed and implemented the permission engine, wrote Common Interface, and informally mentored and led a small team without a formal title."
     }
   ],
   "experience": [
@@ -299,13 +340,16 @@
       "company": "Smart Alpha Beta Gamma Ltd · Remote (UK)",
       "period": "Dec 2021 – Apr 2026",
       "highlights": [
-        "Credit-eligibility platform (in production, 2023 onward): full-stack and principal engineer for architecture, database, APIs and Blazor front ends. Built a heuristic PDF pipeline on Adobe PDF Services, a multi-source ETL framework with idempotent reloads, transactional SqlBulkCopy/MERGE loading, RabbitMQ workers with SignalR status, an accounting-ratio engine and 187 DbUp migrations",
-        "Brokerage billing: designed a pipeline for trade-file and clearer (SFTP) ingestion, position roll-up, per-lot brokerage and monthly PDF/CSV invoices; led the port of a legacy .NET Framework system to a layered .NET 5/6 application",
-        "OTC equity back office: built an 8-step deposit-form wizard that generates compliance PDFs",
-        "Sports data ETL: lead backend engineer and solution architect for .NET 8 services for American football, football, cricket and basketball, with staging-table MERGE upserts and a SQL outbox relay (READPAST/UPDLOCK claiming, stuck-lock reset, backoff with jitter) publishing typed events to RabbitMQ",
-        "Fantasy sports platform (partly built): multi-tenant contest and leaderboard back end; a worker subscribes to match status events from the sports data services and starts leaderboard processing, with a checkpoint table, polling fallback and transactional scoring updates; American football implemented",
-        "Support systems: main author of a risk-support API and admin UI (live match monitor over SignalR fed by a RabbitMQ consumer, withdrawal approvals, FXBO integration); contributed to fund-reporting and risk-dashboard products",
-        "Wrote a Dapper wrapper and shared libraries (test utilities, database configuration, event contracts); maintained CI pipelines across more than ten repositories"
+        "Emerald Capital credit-eligibility platform (in production since 2023): principal engineer and primary author. Owned the architecture, database, APIs, ETL workers and Blazor portals; built PDF statement extraction with Adobe PDF Services, multi-source ingestion with idempotent reloads, RabbitMQ workers with real-time SignalR status, and 187 versioned database migrations",
+        "Emerald Capital admin side: 46-page admin Blazor app on a separate Admin API with its own JWT and CORS settings, a staged client and borrower approval workflow, master data management, analytic grids and a daily onboarding-progress monitor",
+        "Fantasy sports platform (partly built): sole author. Built the multi-tenant, database-per-operator back end, daily contest creation and event-driven leaderboard processing that subscribes to match status events (American football implemented)",
+        "Sports-data ETL services (American football, football, cricket, basketball): lead backend engineer and solution architect. Designed the schema and clean-architecture layout, built the ingestion workers, and added a SQL outbox relay publishing events to RabbitMQ",
+        "Aqua Support Monitor (support and risk admin platform): designed and built it end to end, covering database scripts, a layered ASP.NET Core API (JWT issuing, endpoints restricted to a SupportAdmin role, SignalR live match monitor fed by RabbitMQ), an MVC admin UI with cookie sign-in from JWT claims, withdrawal approvals, KYC and payment screens, panic alerts and push notifications",
+        "iCyber platform API: built a security-analytics API from scratch with Dapper (Windows, Linux, firewall and Azure sign-in logs, malware and attack statistics, trends) with server-side pagination for grid UIs",
+        "FantasyBulls API: match-centre and score endpoints for six sports, and Redis-backed caches for teams, tournaments and matches",
+        "Shared libraries: authored a Dapper wrapper and reusable packages (test utilities, database configuration, mailing, MongoDB, event contracts) used across projects",
+        "Authentication and onboarding services: built the original user-management API and contributed token claims and Profile/KYC APIs",
+        "SmartBro brokerage billing and OTC equity back office: led the port of a legacy billing system to .NET and built the deposit-form wizard that generates compliance PDFs"
       ]
     },
     {
@@ -315,6 +359,7 @@
       "highlights": [
         "Senior engineer on a textile ERP built from scratch (ASP.NET MVC 5, Web API 2, SQL Server; 548 entities, 159 controllers); not all modules were completed during my time",
         "Worked on the Inventory, Yarn Inventory (including yarn dyeing), Knitting, Production (grey fabric), Wash, CDA (Chemicals, Dyes and Auxiliaries store), Supply Chain (import LC, PI, purchase order) and Booking Analysis modules; most were still in progress when I left",
+        "Designed and implemented a custom fine-grained RBAC engine (menu and security rules) giving per-user and per-group, screen- and action-level permissions across dozens of modules, with ASP.NET Identity and OWIN cookie sign-in for the web app and custom JWT bearer authentication for the API",
         "Designed 'Common Interface', a metadata-driven framework for setup pages: screens, fields, grids, lookups and SQL are defined as database rows and rendered by one generic API and view, so a new setup page needs no new back-end or front-end code",
         "Built, as sole developer, an audit and compliance management system (ASP.NET MVC 5, Web API 2, EF6, Autofac, FluentValidation, RDLC): configurable question templates with sections and weights, audits with scopes, findings and formulas, and certificate tracking with history",
         "Built a Supplier Portal (ASP.NET MVC, pdfSharp, jQuery, Bootstrap, dhtmlx, SQL Server), live internally since 2019: imports export-garment sales orders from merchants, processes uploaded purchase-requisition PDFs and prepares supplier requirement requisitions for the ERP",
@@ -331,6 +376,7 @@
         "Eatsy Technologies (2017), a Singapore mobile order-ahead and payment app startup: designed the API architecture for the mobile and web apps and led the back end with two other developers; left before the project was completed",
         "LeadScripts, an AI marketing-copy SaaS product: built the internal admin application and worked on the early OpenAI integration",
         "Delivered client work in C# and .NET, including ASP.NET Core APIs, clean-architecture web app updates and long-running maintenance contracts",
+        "Cloud integrations for clients: medical transcription and voice-to-text (AWS Transcribe Medical, AWS voice-to-text, Azure), AWS S3 integration and AWS deployment",
         "Top Rated freelancer: 39 contracts, 1,764 hours and a 100% Job Success Score; several clients left 5.0 reviews and endorsements"
       ]
     },
