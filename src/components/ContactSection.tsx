@@ -53,7 +53,7 @@ export function ContactSection() {
           transition={{ duration: 0.8 }}
           className="text-center max-w-2xl mx-auto"
         >
-          <p className="font-mono text-primary text-sm mb-4">07. Let's Work Together</p>
+          <p className="font-mono text-primary text-sm mb-4">06. Let's Work Together</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             Open to Senior .NET Roles
           </h2>

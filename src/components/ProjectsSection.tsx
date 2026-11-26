@@ -30,7 +30,7 @@ export function ProjectsSection() {
             Projects I Built
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Six systems described by what they do and how they work. Client and
+            Seven systems described by what they do and how they work. Client and
             employer names, code and screenshots are left out on purpose.
           </p>
         </motion.div>
